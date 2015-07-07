@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DawModelStoreContainer" CdmEntityContainer="DawEntities">
+    <EntitySetMapping Name="carro">
+      <EntityTypeMapping TypeName="DawModel.carro">
+        <MappingFragment StoreEntitySet="carro">
+          <ScalarProperty Name="placa" ColumnName="placa" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="marca" ColumnName="marca" />
+          <ScalarProperty Name="modelo" ColumnName="modelo" />
+          <ScalarProperty Name="color" ColumnName="color" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="comentario">
+      <EntityTypeMapping TypeName="DawModel.comentario">
+        <MappingFragment StoreEntitySet="comentario">
+          <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="contenidoText" ColumnName="contenidoText" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="peticion">
+      <EntityTypeMapping TypeName="DawModel.peticion">
+        <MappingFragment StoreEntitySet="peticion">
+          <ScalarProperty Name="id_peticion" ColumnName="id_peticion" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+          <ScalarProperty Name="posicionLatLon" ColumnName="posicionLatLon" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ruta">
+      <EntityTypeMapping TypeName="DawModel.ruta">
+        <MappingFragment StoreEntitySet="ruta">
+          <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="inicioLatLon" ColumnName="inicioLatLon" />
+          <ScalarProperty Name="finLatLon" ColumnName="finLatLon" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="seguidorusuario">
+      <EntityTypeMapping TypeName="DawModel.seguidorusuario">
+        <MappingFragment StoreEntitySet="seguidorusuario">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="seguido" ColumnName="seguido" />
+          <ScalarProperty Name="sigue" ColumnName="sigue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="usuario">
+      <EntityTypeMapping TypeName="DawModel.usuario">
+        <MappingFragment StoreEntitySet="usuario">
+          <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="cedula" ColumnName="cedula" />
+          <ScalarProperty Name="nombres" ColumnName="nombres" />
+          <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+          <ScalarProperty Name="nombUsuario" ColumnName="nombUsuario" />
+          <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+          <ScalarProperty Name="matricula" ColumnName="matricula" />
+          <ScalarProperty Name="userFB" ColumnName="userFB" />
+          <ScalarProperty Name="userTW" ColumnName="userTW" />
+          <ScalarProperty Name="rutaImagen" ColumnName="rutaImagen" />
+          <ScalarProperty Name="tieneCarro" ColumnName="tieneCarro" />
+          <ScalarProperty Name="nMultas" ColumnName="nMultas" />
+          <ScalarProperty Name="nSeguidores" ColumnName="nSeguidores" />
+          <ScalarProperty Name="nSiguiendo" ColumnName="nSiguiendo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

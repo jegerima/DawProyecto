@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site/2014_1T/Grupo11/" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^C:\\Users\\Jegerima\\Source\\Workspaces\\DawRevenge\\DawRevenge\\DawRevenge\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^C:\\Users\\Jegerima\\Source\\Workspaces\\DawRevenge\\DawRevenge\\DawRevenge\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DawEntities-Web.config Connection String" description="" value="metadata=res://*/Models.BaseDaw.csdl|res://*/Models.BaseDaw.ssdl|res://*/Models.BaseDaw.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;user id=ltamayo;password=ltamayo;server=200.10.150.66;persistsecurityinfo=True;database=proyectodaw20141T&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Jegerima\\Source\\Workspaces\\DawRevenge\\DawRevenge\\DawRevenge\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DawEntities']/@connectionString" />
+  </parameter>
+</parameters>

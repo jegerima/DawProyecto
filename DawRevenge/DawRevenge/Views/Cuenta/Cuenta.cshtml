@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Cuenta";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Hacia all&aacute;!</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Recursos/images/logo.ico")" />
+    <link rel="stylesheet" href="@Url.Content("~/Recursos/css/stylesheet.css")" />
+    <script src="@Url.Content("~/Recursos/js/scriptPerfil.js")"></script>
+</head>
+<body>
+    <img alt="fondo" src="@Url.Content("~/Recursos/images/fondo_gye2.jpg")" id="backgroundPerfil" />
+    <nav id="menunav">
+        <ul>
+            <li><a href="javascript:mostrarInicio('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Inicio</a></li>
+            <li><a href="javascript:mostrarSiguiendo('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Siguiendo</a></li>
+            <li><a href="javascript:mostrarSeguidores('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Seguidores</a></li>
+            <li class="selectedM"><a href="javascript:mostraPerfil('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Cuenta</a></li>
+            <li><a href="javascript:buscarAmigos('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Buscar</a></li>
+        </ul>
+    </nav>
+    <img alt="logo" src="@Url.Content("~/Recursos/images/logo.png")" id="logoMain" onclick="javascript: mostrarInicio('@ViewBag.usuario.nombUsuario', '@ViewBag.token')" />
+    <div id="contentPerfil">
+        <div id="frmPerfil">
+            <p id="nombrePerfil">@ViewBag.usuario.nombres @ViewBag.usuario.apellidos</p>
+            <div id="divPerfil">
+                <text id="userPerfil">@ViewBag.usuario.nombUsuario</text>
+                    @if( @ViewBag.usuario.tieneCarro == 1)
+                    {
+                        @:<text class="leyendaPerfil"> -"Tiene Carro"</text>
+                    }
+                    else
+                    {
+                        @:<text class="leyendaPerfil"> -"No tiene carro"</text>
+                    }
+            </div>
+            <figure><img src="@Url.Content("~/Recursos/images/no-photo.jpg")" id="fotoPerfil"></figure>
+            <div id="divTable">
+                <table id="tableSigSeg">
+                    <tr id="trSigSeg">
+                        <td class="leyendaPerfil">Siguiendo</td>
+                        <td class="leyendaPerfil">Seguidores</td>
+                    </tr>
+                    <tr id="trNums">
+                        <td class="leyendaPerfil">@ViewBag.usuario.nSiguiendo</td>
+                        <td class="leyendaPerfil">@ViewBag.usuario.nSeguidores</td>
+                    </tr>
+                </table>
+            </div>
+            @foreach(DawRevenge.Models.comentario c in @ViewBag.comentarios)
+            {
+            <div id="miComentId3" class="miComent">
+                <b>@ViewBag.usuario.nombUsuario (@c.fecha):</b> @c.contenidoText
+            </div>
+            }
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DawModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="carro">
+    <Key>
+      <PropertyRef Name="placa" />
+    </Key>
+    <Property Name="placa" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="usuario" Relationship="Self.carro_ibfk_1" FromRole="carro" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="comentario">
+    <Key>
+      <PropertyRef Name="id_comentario" />
+    </Key>
+    <Property Name="id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="contenidoText" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" />
+    <NavigationProperty Name="usuario" Relationship="Self.comentario_ibfk_1" FromRole="comentario" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="peticion">
+    <Key>
+      <PropertyRef Name="id_peticion" />
+    </Key>
+    <Property Name="id_peticion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="id_ruta" Type="Int32" />
+    <Property Name="posicionLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="valor" Type="Decimal" />
+    <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" />
+    <NavigationProperty Name="usuario" Relationship="Self.peticion_ibfk_1" FromRole="peticion" ToRole="usuario" />
+    <NavigationProperty Name="ruta" Relationship="Self.peticion_ibfk_2" FromRole="peticion" ToRole="ruta" />
+  </EntityType>
+  <EntityType Name="ruta">
+    <Key>
+      <PropertyRef Name="id_ruta" />
+    </Key>
+    <Property Name="id_ruta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_usuario" Type="Int32" />
+    <Property Name="inicioLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="finLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="fecha" Type="DateTime" />
+    <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+    <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="peticion" Relationship="Self.peticion_ibfk_2" FromRole="ruta" ToRole="peticion" />
+    <NavigationProperty Name="usuario" Relationship="Self.ruta_ibfk_1" FromRole="ruta" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="seguidorusuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="seguido" Type="Int32" />
+    <Property Name="sigue" Type="Int32" />
+    <NavigationProperty Name="usuario" Relationship="Self.seguidorusuario_ibfk_1" FromRole="seguidorusuario" ToRole="usuario" />
+    <NavigationProperty Name="usuario1" Relationship="Self.seguidorusuario_ibfk_2" FromRole="seguidorusuario" ToRole="usuario" />
+  </EntityType>
+  <EntityType Name="usuario">
+    <Key>
+      <PropertyRef Name="id_usuario" />
+    </Key>
+    <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="nombUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="contrasenia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="matricula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+    <Property Name="userFB" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="userTW" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="rutaImagen" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="tieneCarro" Type="Int32" />
+    <Property Name="nMultas" Type="Int32" />
+    <Property Name="nSeguidores" Type="Int32" />
+    <Property Name="nSiguiendo" Type="Int32" />
+    <NavigationProperty Name="carro" Relationship="Self.carro_ibfk_1" FromRole="usuario" ToRole="carro" />
+    <NavigationProperty Name="comentario" Relationship="Self.comentario_ibfk_1" FromRole="usuario" ToRole="comentario" />
+    <NavigationProperty Name="peticion" Relationship="Self.peticion_ibfk_1" FromRole="usuario" ToRole="peticion" />
+    <NavigationProperty Name="ruta" Relationship="Self.ruta_ibfk_1" FromRole="usuario" ToRole="ruta" />
+    <NavigationProperty Name="seguidorusuario" Relationship="Self.seguidorusuario_ibfk_1" FromRole="usuario" ToRole="seguidorusuario" />
+    <NavigationProperty Name="seguidorusuario1" Relationship="Self.seguidorusuario_ibfk_2" FromRole="usuario" ToRole="seguidorusuario" />
+  </EntityType>
+  <Association Name="carro_ibfk_1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="carro" Type="Self.carro" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="carro">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="comentario_ibfk_1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="comentario">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="peticion_ibfk_1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="peticion">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="peticion_ibfk_2">
+    <End Role="ruta" Type="Self.ruta" Multiplicity="0..1" />
+    <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ruta">
+        <PropertyRef Name="id_ruta" />
+      </Principal>
+      <Dependent Role="peticion">
+        <PropertyRef Name="id_ruta" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ruta_ibfk_1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="ruta" Type="Self.ruta" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="ruta">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="seguidorusuario_ibfk_1">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="seguidorusuario">
+        <PropertyRef Name="sigue" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="seguidorusuario_ibfk_2">
+    <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+    <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="usuario">
+        <PropertyRef Name="id_usuario" />
+      </Principal>
+      <Dependent Role="seguidorusuario">
+        <PropertyRef Name="seguido" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DawEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carro" EntityType="Self.carro" />
+    <EntitySet Name="comentario" EntityType="Self.comentario" />
+    <EntitySet Name="peticion" EntityType="Self.peticion" />
+    <EntitySet Name="ruta" EntityType="Self.ruta" />
+    <EntitySet Name="seguidorusuario" EntityType="Self.seguidorusuario" />
+    <EntitySet Name="usuario" EntityType="Self.usuario" />
+    <AssociationSet Name="carro_ibfk_1" Association="Self.carro_ibfk_1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="carro" EntitySet="carro" />
+    </AssociationSet>
+    <AssociationSet Name="comentario_ibfk_1" Association="Self.comentario_ibfk_1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="comentario" EntitySet="comentario" />
+    </AssociationSet>
+    <AssociationSet Name="peticion_ibfk_1" Association="Self.peticion_ibfk_1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="peticion" EntitySet="peticion" />
+    </AssociationSet>
+    <AssociationSet Name="peticion_ibfk_2" Association="Self.peticion_ibfk_2">
+      <End Role="ruta" EntitySet="ruta" />
+      <End Role="peticion" EntitySet="peticion" />
+    </AssociationSet>
+    <AssociationSet Name="ruta_ibfk_1" Association="Self.ruta_ibfk_1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="ruta" EntitySet="ruta" />
+    </AssociationSet>
+    <AssociationSet Name="seguidorusuario_ibfk_1" Association="Self.seguidorusuario_ibfk_1">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+    </AssociationSet>
+    <AssociationSet Name="seguidorusuario_ibfk_2" Association="Self.seguidorusuario_ibfk_2">
+      <End Role="usuario" EntitySet="usuario" />
+      <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

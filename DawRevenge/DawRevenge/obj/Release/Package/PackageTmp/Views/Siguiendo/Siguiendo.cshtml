@@ -1,0 +1,57 @@
+﻿@{
+    ViewBag.Title = "Siguiendo";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hacia all&aacute;!</title>
+    <meta charset="utf-8" />
+    <link rel="shortcut icon" href="@Url.Content("~/Recursos/images/logo.ico")" />
+    <link rel="stylesheet" href="@Url.Content("~/Recursos/css/stylesheet.css")" />
+    <script src="@Url.Content("~/Recursos/js/scriptSegSig.js")" type="text/javascript"></script>
+</head>
+<body>
+    <img alt="fondo" src="@Url.Content("~/Recursos/images/fondo_gye.jpg")" id="backgroundIndex" />
+    <nav id="menunav">
+        <ul class="RespOFF" id="menuul">
+            <li><a href="javascript:mostrarInicio('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Inicio</a></li>
+            <li class="selectedM"><a href="javascript:mostrarSiguiendo('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Siguiendo</a></li>
+            <li><a href="javascript:mostrarSeguidores('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Seguidores</a></li>
+            <li><a href="javascript:mostraPerfil('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Cuenta</a></li>
+            <li><a href="javascript:buscarAmigos('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Buscar</a></li>
+        </ul>
+        <a href="#" id="pull"><img id="respMenu" alt="Menu" src="@Url.Content("~/Recursos/images/rsp-menu.png")" />></a>
+    </nav>
+    <img alt="logo" src="@Url.Content("~/Recursos/images/logo.png")" id="logoMain" onclick="javascript: mostrarInicio('@ViewBag.usuario.nombUsuario', '@ViewBag.token')" />
+    <div id="divContenedor">
+        <div id="divSiguiendo">
+            <div id="divIdSiguiendo">
+                <p id="pSiguiendo">Siguiendo</p>
+            </div>
+            <div id="divListaSiguiendo">
+                <ul id="ulListaSiguiendo">
+                    @foreach(DawRevenge.Models.usuario u in @ViewBag.siguiendo)
+                    { 
+                    <a href="javascript:mostrarInfoUser('@ViewBag.token','@u.nombUsuario','@ViewBag.usuario.nombUsuario')">
+                        <li class="itemSiguiendo">@u.nombUsuario</li>
+                    </a>
+                    }
+                </ul>
+            </div>
+        </div>
+        <div id="divSiguiendoInfo">
+            <div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+      function infoUsuarioRaw()
+      {
+          infoUser2("{{usuario.nombres}}","{{usuario.apellidos}}",
+                   "{{usuario.cedula}}","{{usuario.matricula}}",
+                   "{{usuario.nsiguiendo}}","{{usuario.nseguidores}}");
+      }
+</script>
+</html>

@@ -1,0 +1,267 @@
+﻿@{
+    ViewBag.Title = "Main";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Hacia all&aacute;!</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="@Url.Content("~/Recursos/images/logo.ico")" />
+    <link rel="stylesheet" href="@Url.Content("~/Recursos/css/stylesheet.css")" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+    <script type="text/javascript">
+        var script = '<script type="text/javascript" src="http://google-maps-' +
+            'utility-library-v3.googlecode.com/svn/trunk/infobubble/src/infobubble';
+        if (document.location.search.indexOf('compiled') !== -1) {
+            script += '-compiled';
+        }
+        script += '.js"><' + '/script>';
+        document.write(script);
+    </script>
+    <script type="text/javascript" src="http://l2.io/ip.js?var=myip"></script>
+    <script src="@Url.Content("~/Recursos/js/scriptMain.js")" type="text/javascript"></script>
+</head>
+<body>
+    <nav id="menunav">
+        <ul class="RespOFF" id="menuul">
+            <li class="selectedM"><a href="javascript:mostrarInicio('@ViewBag.usuario.nombUsuario','{{token}}')">Inicio</a></li>
+            <li><a href="javascript:mostrarSiguiendo('@ViewBag.usuario.nombUsuario','{{token}}')">Siguiendo</a></li>
+            <li><a href="javascript:mostrarSeguidores('@ViewBag.usuario.nombUsuario','{{token}}')">Seguidores</a></li>
+            <li><a href="javascript:mostraPerfil('@ViewBag.usuario.nombUsuario','{{token}}')">Cuenta</a></li>
+            <li><a href="javascript:buscarAmigos('@ViewBag.usuario.nombUsuario','{{token}}')">Buscar</a></li>
+        </ul>
+        <a href="#" id="pull"><img id="respMenu" alt="Menu" src="@Url.Content("~/Recursos/images/rsp-menu.png")" />></a>
+    </nav>
+    <div id="sidebar">
+        <img alt="logo" src="@Url.Content("~/Recursos/images/logo.png")" id="logoMain" />
+        <!--Menu del sidebar-->
+        <div id="sidebarMenu">
+            <ul id="ulSidebar">
+                <li id="crearRuta"><a href="javascript:indicarHoraRuta('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Crear Nueva Ruta</a></li>
+                <li><a href="javascript:nuevoComentario('@ViewBag.usuario.nombUsuario','@ViewBag.token')">Nuevo comentario</a></li>
+            </ul>
+        </div>
+        <div id="sidebarComments" style="margin: 10px 0px;">
+            <ul id="sidebar_ul_comments" style="padding: 0px;">
+                @foreach (DawRevenge.Models.usuario u in @ViewBag.siguiendo)
+                {
+                    foreach (DawRevenge.Models.comentario c in u.comentario.ToList())
+                    {
+                        <li class="li_comment_class">
+                            <b>@u.nombUsuario (@c.fecha):</b> @c.contenidoText
+                        </li>
+                    }
+                }
+            </ul>
+        </div>
+        <div id="div_LogOff">
+            <form action="/">
+                <input type="submit" class="botonSubmit" value="Cerrar sesi&oacute;n" />
+            </form>
+        </div>
+    </div>
+    <aside id="sidebar_right">
+        <div id="divRutas" style="height: 50%;">
+            <div style="text-align: right; border-bottom-style: outset; border-bottom-width: 1px;background: #CF3838; padding: 0px 10px 0px 0px; font-size: 26px; color: #FFFFFF; height: 35px;">
+                Rutas
+            </div>
+            <div class="divScrollMain">
+                <ul id="ul_rutas">
+                    @foreach (Object[] ru in @ViewBag.rutasSiguiendo)
+                    {
+
+                        <a href="javascript:dibujarRuta('@ViewBag.usuario.nombUsuario',@ru[0], '@ru[3]',@ru[1],@ru[2],null,null,true,'@ViewBag.token','@ru[6]')">
+                            <li class="li_ruta_class"> <b>@ru[4] <br> @ru[3] </b> por : @ru[5]</li>
+                        </a>
+
+                    }
+                </ul>
+            </div>
+        </div>
+        <div id="divPeticiones" style="height: 50%;">
+            <div style="text-align: right; border-bottom-style: outset; border-bottom-width: 1px;background: #CF3838; padding: 0px 10px 0px 0px; font-size: 26px; color: #FFFFFF; height: 35px;">
+                Peticiones
+            </div>
+            <div class="divScrollMain">
+                <ul id="ul_peticiones">
+                    @foreach (DawRevenge.Models.ruta r in @ViewBag.misRutas)
+                    {
+                        foreach (DawRevenge.Models.peticion p in r.peticion.ToList())
+                        {
+                            if (p.estado.Equals("ESPERA"))
+                            {
+                                <a href="javascript:dibujarRuta('@p.usuario.nombUsuario',@r.id_ruta,'@r.nombre',@r.inicioLatLon,@r.finLatLon,@p.posicionLatLon,false,'@ViewBag.token','NO')">
+                                    <li class="li_ruta_class">Pedido de @p.usuario.nombUsuario @r.nombre </li>
+                                </a>
+                            }
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </aside>
+    <div id="map-canvas"></div>
+
+
+    <script src="~/Recursos/js/jquery-1.6.4.min.js"></script>
+    <script src="~/Recursos/js/jquery.signalR-2.1.2.min.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            iniciarSignalR();
+        })
+
+        function iniciarSignalR() {
+            var comentariosProxy = $.connection.comentariosHub;
+            comentariosProxy.client.agregarComentario = function (user, comentario, fecha) {
+                $('#sidebar_ul_comments').append('<li class="li_comment_class">' + '<b>' + user + '(' + fecha + '): ' + comentario + '</li>');
+            }
+            $.connection.hub.start();
+
+            var aceptarPeticionesProxy = $.connection.peticionesHub;
+            aceptarPeticionesProxy.client.aceptarPeticion = function (user, ruta, aceptacion) {
+                if (user == '@ViewBag.usuario.nombUsuario') {
+                    if (aceptacion == "aceptar") {
+                        popupPeticionAceptada(user);
+                    }
+                }
+            }
+            $.connection.hub.start();
+
+            var recibirPeticionesProxy = $.connection.peticionesHub;
+            recibirPeticionesProxy.client.envioPeticionRuta = function (user, ruta, nombreRuta, fecha, inicioRuta, finRuta, posicion) {
+                if (user != '@ViewBag.usuario.nombUsuario') {
+
+                    popupPeticionRecibida(user);
+                    $('#ul_peticiones').append('<a href="javascript:dibujarRuta(&#39' + user + '&#39,' + ruta + ',' + '&#39' + nombreRuta + '&#39,' + inicioRuta + ',' + finRuta + ',' + posicion + ',false,&#39 &#39, &#39NO&#39 )"><li class="li_ruta_class">Pedido de ' + user + ' ' + nombreRuta + '</li></a>')
+                }
+
+            }
+            $.connection.hub.start();
+
+            var agregarRutasProxy = $.connection.rutasHub;
+            agregarRutasProxy.client.dataAgregarRuta = function (user, ruta, fecha, nombreRuta, origen, destino) {
+                
+                var array = @Html.Raw(
+                         Json.Encode(((IEnumerable<DawRevenge.Models.usuario>)ViewBag.seguidores).Select(userTmp => new 
+                                {
+                                    userId = userTmp.nombUsuario, 
+               
+                                })
+                           )
+                     );
+                sigueA=false;
+                for (i=0;i<array.length;i++){
+                    if(array[i].userId==user){
+                        sigueA=true;
+                        break;
+                    }
+                }
+                if(sigueA){
+                    $('#ul_rutas').append('<a href="javascript:dibujarRuta(&#39'+'@ViewBag.usuario.nombUsuario'+'&#39,'+ruta+',&#39'+nombreRuta+'&#39,'+origen+','+destino+',null,null,true,&#39 &#39,&#39NO&#39)"><li class="li_ruta_class"><b>'+fecha+'<br>'+nombreRuta+' </b> por : '+user+'</li></a>')
+                
+                }
+            }
+            $.connection.hub.start();
+        }
+
+
+
+
+        function popupPeticionAceptada(user) {
+            var popup, frm, titulo, leyenda, btn;
+
+            popup = document.createElement("div");
+            popup.setAttribute("class", "popup");
+            popup.setAttribute("id", "popup");
+
+            frm = document.createElement("div");
+            frm.setAttribute("id", "frmPopupPeticiones");
+            frm.setAttribute("class", "frmPopupPeticiones");
+
+            titulo = document.createElement("p");
+            titulo.setAttribute("id", "titulo");
+            titulo.style.marginTop = "0px";
+            titulo.style.fontSize = "30px";
+            titulo.innerHTML = "Peticion";
+            frm.appendChild(titulo);
+
+            leyenda = document.createElement("div");
+            leyenda.setAttribute("class", "leyenda");
+            leyenda.style.fontSize = "13px";
+            leyenda.innerHTML = "El usuario " + user + " ha aceptado su petición."
+            frm.appendChild(leyenda);
+            popup.appendChild(frm);
+
+            leyenda = document.createElement("div");
+            leyenda.setAttribute("class", "leyenda");
+            btn = document.createElement("input");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("id", "cerrarPet");
+            btn.setAttribute("class", "botonSubmit");
+            btn.style.fontSize = "13px";
+            btn.style.width = "70px";
+            btn.style.height = "30px";
+            btn.setAttribute("value", "Aceptar");
+            btn.addEventListener("click", function () {
+                var popup = document.getElementById("popup");
+                popup.parentNode.removeChild(popup);
+            }, false);
+            leyenda.appendChild(btn);
+            frm.appendChild(leyenda);
+
+            seccion = document.getElementById("map-canvas");
+            seccion.appendChild(popup);
+        }
+
+        function popupPeticionRecibida(user) {
+            var popup, frm, titulo, leyenda, btn;
+
+            popup = document.createElement("div");
+            popup.setAttribute("class", "popup");
+            popup.setAttribute("id", "popup");
+
+            frm = document.createElement("div");
+            frm.setAttribute("id", "frmPopupPeticiones");
+            frm.setAttribute("class", "frmPopupPeticiones");
+
+            titulo = document.createElement("p");
+            titulo.setAttribute("id", "titulo");
+            titulo.style.marginTop = "0px";
+            titulo.style.fontSize = "30px";
+            titulo.innerHTML = "Peticion";
+            frm.appendChild(titulo);
+
+            leyenda = document.createElement("div");
+            leyenda.setAttribute("class", "leyenda");
+            leyenda.style.fontSize = "13px";
+            leyenda.innerHTML = "El usuario " + user + " ha enviado una petición a una de sus rutas."
+            frm.appendChild(leyenda);
+            popup.appendChild(frm);
+
+            leyenda = document.createElement("div");
+            leyenda.setAttribute("class", "leyenda");
+            btn = document.createElement("input");
+            btn.setAttribute("type", "button");
+            btn.setAttribute("id", "cerrarPet");
+            btn.setAttribute("class", "botonSubmit");
+            btn.style.fontSize = "13px";
+            btn.style.width = "70px";
+            btn.style.height = "30px";
+            btn.setAttribute("value", "Aceptar");
+            btn.addEventListener("click", function () {
+                var popup = document.getElementById("popup");
+                popup.parentNode.removeChild(popup);
+            }, false);
+            leyenda.appendChild(btn);
+            frm.appendChild(leyenda);
+
+            seccion = document.getElementById("map-canvas");
+            seccion.appendChild(popup);
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Hacia all&aacute;!</title>
+    <link rel="shortcut icon" href="@Url.Content("~/Recursos/images/logo.ico")"/>
+    <link rel="stylesheet" href="@Url.Content("~/Recursos/css/stylesheet.css")"/>
+    <script src="@Url.Content("~/Recursos/js/scriptIndex.js")" type="text/javascript"></script>
+</head>
+<body>
+    <img alt="fondo" src="@Url.Content("~/Recursos/images/fondo_gye.jpg")" id="backgroundIndex" />
+    <img alt="logo" src="@Url.Content("~/Recursos/images/logo.png")" id="logo" />
+    <div id="content">
+        <div id="login" class="formCntr">
+            <p id="titulo">Hacia all&aacute;!</p>
+            <p id="subtitulo">"D&aacute;ndonos la mano"</p>
+            <div class="leyenda2">&Uacute;nete a la red m&aacute;s grande de amigos al volante</div>
+            <form id="formSubmit" onsubmit="iniciarSesion(); return false;">
+                <div class="leyenda"><input type="text" id="txtUser" required class="textBox" name="user" placeholder="Usuario" autofocus oninvalid="setCustomValidity('Campo obligatorio')" oninput="setCustomValidity('')" onchange="ocultarXLogin();" /></div>
+                <div class="leyenda"><input type="password" id="txtPass" required class="textBox" name="pasw" placeholder="Contraseña" oninvalid="setCustomValidity('Campo obligatorio')" oninput="setCustomValidity('')" onchange="ocultarXLogin();" /></div>
+                <div class="leyenda"><input type="submit" id="btnIniciar" class="botonSubmit" value="Iniciar sesión" /></div>
+            </form>
+            <div class="leyenda2">¿No tienes una cuenta? <b><a id="registrar" href="#" onclick="javascript:crearFrmRegistro()">¡Reg&iacute;strate ahora!</a></b></div>
+        </div>
+    </div>
+</body>
+</html>

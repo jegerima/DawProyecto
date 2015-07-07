@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="DawEntities-Web.config Connection String" description="DawEntities Cadena de conexión que usa la aplicación en web.config para obtener acceso a la base de datos." defaultValue="metadata=res://*/Models.BaseDaw.csdl|res://*/Models.BaseDaw.ssdl|res://*/Models.BaseDaw.msl;provider=MySql.Data.MySqlClient;provider connection string=&quot;user id=ltamayo;password=ltamayo;server=200.10.150.66;persistsecurityinfo=True;database=proyectodaw20141T&quot;" tags="SqlConnectionString">
+    <parameterEntry kind="XmlFile" scope="C:\\Users\\Jegerima\\Source\\Workspaces\\DawRevenge\\DawRevenge\\DawRevenge\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DawEntities']/@connectionString" />
+  </parameter>
+</parameters>

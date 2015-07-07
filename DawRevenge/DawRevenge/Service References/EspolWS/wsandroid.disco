@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<discovery xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.xmlsoap.org/disco/">
+  <contractRef ref="https://ws.espol.edu.ec/saac/wsandroid.asmx?wsdl" docRef="https://ws.espol.edu.ec/saac/wsandroid.asmx" xmlns="http://schemas.xmlsoap.org/disco/scl/" />
+  <soap address="https://ws.espol.edu.ec/saac/wsandroid.asmx" xmlns:q1="http://tempuri.org/" binding="q1:wsandroidSoap" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+  <soap address="https://ws.espol.edu.ec/saac/wsandroid.asmx" xmlns:q2="http://tempuri.org/" binding="q2:wsandroidSoap12" xmlns="http://schemas.xmlsoap.org/disco/soap/" />
+</discovery>

@@ -1,0 +1,1634 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://tempuri.org/xmlCarrerasCreditos.xsd" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://tempuri.org/xmlCarrerasCreditos.xsd" />
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="autenticacion">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="authUser" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="authContrasenia" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="autenticacionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="autenticacionResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasRegistradas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoestudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasRegistradasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsMateriasRegistradasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasDisponibles">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoestudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasDisponiblesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsMateriasDisponiblesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsBuscarMateria">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="parametro" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="tipo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsBuscarMateriaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsBuscarMateriaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsEstudiantesRegistrados">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoMateria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="paralelo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsEstudiantesRegistradosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsEstudiantesRegistradosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasADictar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userprofesor" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasADictarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsMateriasADictarResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoparalelo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoMateria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="paralelo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoparaleloResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoparaleloResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHorarioClases">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoMateria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="paralelo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHorarioClasesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsHorarioClasesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHorarioExamenes">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoMateria" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="paralelo" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHorarioExamenesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsHorarioExamenesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasAulas">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idaula" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsMateriasAulasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsMateriasAulasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoEstudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoEstudianteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteCarrera">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoEstudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteCarreraResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoEstudianteCarreraResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoUsuario">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="usuario" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoUsuarioResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoUsuarioResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteGeneral">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codestudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteGeneralResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoEstudianteGeneralResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaCodigoEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="user" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaCodigoEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaCodigoEstudianteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsActividadesExtracurriculares">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoestudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsActividadesExtracurricularesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsActividadesExtracurricularesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsFechaRegistros">
+        <s:complexType />
+      </s:element>
+      <s:element name="wsFechaRegistrosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsFechaRegistrosResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDeudasNovalor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDeudasNovalorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsDeudasNovalorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDeudasvalor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsDeudasvalorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsDeudasvalorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaCalificaciones">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="anio" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="termino" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="estudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaCalificacionesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaCalificacionesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCargaAcademicaProfesor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idpersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCargaAcademicaProfesorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsCargaAcademicaProfesorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCargaPolitecnicaProfesor">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="idpersona" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsCargaPolitecnicaProfesorResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsCargaPolitecnicaProfesorResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHistorialCreditos">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="codigoEstudiante" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsHistorialCreditosResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:wsHistorialCreditosResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteMalla">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoEstudianteMallaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoEstudianteMallaResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaUnidadesAcademicas">
+        <s:complexType />
+      </s:element>
+      <s:element name="wsConsultaUnidadesAcademicasResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaUnidadesAcademicasResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaRoles">
+        <s:complexType />
+      </s:element>
+      <s:element name="wsConsultaRolesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaRolesResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultarPersonaPorNombres">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nombre" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="apellido" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultarPersonaPorNombresResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultarPersonaPorNombresResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaEstudiantePorUnidadRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idrol" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codunidad" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaEstudiantePorUnidadRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaEstudiantePorUnidadRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaProfesorPorUnidadRol">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="idrol" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="codunidad" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaProfesorPorUnidadRolResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaProfesorPorUnidadRolResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoPersonalEstudiante">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="matricula" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="identificacion" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsInfoPersonalEstudianteResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsInfoPersonalEstudianteResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="wsConsultaPeriodoActual">
+        <s:complexType />
+      </s:element>
+      <s:element name="wsConsultaPeriodoActualResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="wsConsultaPeriodoActualResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:element ref="s:schema" />
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/xmlCarrerasCreditos.xsd">
+      <s:element name="wsHistorialCreditosResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoEstudiante" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Apellidos" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Nombres" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoDivision" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoCarrera" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CodigoEspecializacion" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="NombreCarrera" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Creditos" type="s1:ArrayOfEstudianteTipoCredito" />
+            <s:element minOccurs="0" maxOccurs="1" name="Resumen" type="s1:ArrayOfEstudianteCredito" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfEstudianteTipoCredito">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TipoCredito">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="1" maxOccurs="1" name="IdTipoCredito" type="s:int" />
+                <s:element minOccurs="0" maxOccurs="1" name="NombreCredito" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="MateriasCreditos" type="s1:ArrayOfEstudianteTipoCreditoMateria" />
+                <s:element minOccurs="1" maxOccurs="1" name="TotalCreditos" type="s:int" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEstudianteTipoCreditoMateria">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Materia">
+            <s:complexType>
+              <s:sequence>
+                <s:element minOccurs="0" maxOccurs="1" name="CodigoMateria" type="s:string" />
+                <s:element minOccurs="0" maxOccurs="1" name="NombreMateria" type="s:string" />
+                <s:element minOccurs="1" maxOccurs="1" name="NumeroCredito" type="s:int" />
+                <s:element minOccurs="1" maxOccurs="1" name="EstadoMateria">
+                  <s:simpleType>
+                    <s:restriction base="s:string">
+                      <s:enumeration value="APROBADA" />
+                      <s:enumeration value="ACREDITADA" />
+                      <s:enumeration value="CONVALIDADA" />
+                    </s:restriction>
+                  </s:simpleType>
+                </s:element>
+                <s:element minOccurs="0" maxOccurs="1" name="CodigoCredito" type="s:string" />
+              </s:sequence>
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfEstudianteCredito">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Credito">
+            <s:complexType>
+              <s:attribute name="StrReajuste" type="s:string" />
+              <s:attribute name="Reajuste" type="s:int" use="required" />
+              <s:attribute name="IdTipoCredito" type="s:int" use="required" />
+              <s:attribute name="TipoCredito" type="s:string" />
+              <s:attribute name="Tomados" type="s:int" use="required" />
+              <s:attribute name="Flujo" type="s:int" use="required" />
+              <s:attribute name="Excedente" type="s:int" use="required" />
+              <s:attribute name="ExcedenteParaReajuste" type="s:int" use="required" />
+              <s:attribute name="TomadosAntesDel2013" type="s:int" use="required" />
+            </s:complexType>
+          </s:element>
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="autenticacionSoapIn">
+    <wsdl:part name="parameters" element="tns:autenticacion" />
+  </wsdl:message>
+  <wsdl:message name="autenticacionSoapOut">
+    <wsdl:part name="parameters" element="tns:autenticacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasRegistradasSoapIn">
+    <wsdl:part name="parameters" element="tns:wsMateriasRegistradas" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasRegistradasSoapOut">
+    <wsdl:part name="parameters" element="tns:wsMateriasRegistradasResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasDisponiblesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsMateriasDisponibles" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasDisponiblesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsMateriasDisponiblesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsBuscarMateriaSoapIn">
+    <wsdl:part name="parameters" element="tns:wsBuscarMateria" />
+  </wsdl:message>
+  <wsdl:message name="wsBuscarMateriaSoapOut">
+    <wsdl:part name="parameters" element="tns:wsBuscarMateriaResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsEstudiantesRegistradosSoapIn">
+    <wsdl:part name="parameters" element="tns:wsEstudiantesRegistrados" />
+  </wsdl:message>
+  <wsdl:message name="wsEstudiantesRegistradosSoapOut">
+    <wsdl:part name="parameters" element="tns:wsEstudiantesRegistradosResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasADictarSoapIn">
+    <wsdl:part name="parameters" element="tns:wsMateriasADictar" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasADictarSoapOut">
+    <wsdl:part name="parameters" element="tns:wsMateriasADictarResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoparaleloSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoparalelo" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoparaleloSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoparaleloResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsHorarioClasesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsHorarioClases" />
+  </wsdl:message>
+  <wsdl:message name="wsHorarioClasesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsHorarioClasesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsHorarioExamenesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsHorarioExamenes" />
+  </wsdl:message>
+  <wsdl:message name="wsHorarioExamenesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsHorarioExamenesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasAulasSoapIn">
+    <wsdl:part name="parameters" element="tns:wsMateriasAulas" />
+  </wsdl:message>
+  <wsdl:message name="wsMateriasAulasSoapOut">
+    <wsdl:part name="parameters" element="tns:wsMateriasAulasResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteCarreraSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteCarrera" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteCarreraSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteCarreraResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoUsuarioSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoUsuario" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoUsuarioSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoUsuarioResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteGeneralSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteGeneral" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteGeneralSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteGeneralResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaCodigoEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaCodigoEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaCodigoEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaCodigoEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsActividadesExtracurricularesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsActividadesExtracurriculares" />
+  </wsdl:message>
+  <wsdl:message name="wsActividadesExtracurricularesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsActividadesExtracurricularesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsFechaRegistrosSoapIn">
+    <wsdl:part name="parameters" element="tns:wsFechaRegistros" />
+  </wsdl:message>
+  <wsdl:message name="wsFechaRegistrosSoapOut">
+    <wsdl:part name="parameters" element="tns:wsFechaRegistrosResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsDeudasNovalorSoapIn">
+    <wsdl:part name="parameters" element="tns:wsDeudasNovalor" />
+  </wsdl:message>
+  <wsdl:message name="wsDeudasNovalorSoapOut">
+    <wsdl:part name="parameters" element="tns:wsDeudasNovalorResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsDeudasvalorSoapIn">
+    <wsdl:part name="parameters" element="tns:wsDeudasvalor" />
+  </wsdl:message>
+  <wsdl:message name="wsDeudasvalorSoapOut">
+    <wsdl:part name="parameters" element="tns:wsDeudasvalorResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaCalificacionesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaCalificaciones" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaCalificacionesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaCalificacionesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsCargaAcademicaProfesorSoapIn">
+    <wsdl:part name="parameters" element="tns:wsCargaAcademicaProfesor" />
+  </wsdl:message>
+  <wsdl:message name="wsCargaAcademicaProfesorSoapOut">
+    <wsdl:part name="parameters" element="tns:wsCargaAcademicaProfesorResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsCargaPolitecnicaProfesorSoapIn">
+    <wsdl:part name="parameters" element="tns:wsCargaPolitecnicaProfesor" />
+  </wsdl:message>
+  <wsdl:message name="wsCargaPolitecnicaProfesorSoapOut">
+    <wsdl:part name="parameters" element="tns:wsCargaPolitecnicaProfesorResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsHistorialCreditosSoapIn">
+    <wsdl:part name="parameters" element="tns:wsHistorialCreditos" />
+  </wsdl:message>
+  <wsdl:message name="wsHistorialCreditosSoapOut">
+    <wsdl:part name="parameters" element="tns:wsHistorialCreditosResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteMallaSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteMalla" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoEstudianteMallaSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoEstudianteMallaResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaUnidadesAcademicasSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaUnidadesAcademicas" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaUnidadesAcademicasSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaUnidadesAcademicasResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaRolesSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaRoles" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaRolesSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaRolesResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultarPersonaPorNombresSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultarPersonaPorNombres" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultarPersonaPorNombresSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultarPersonaPorNombresResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaEstudiantePorUnidadRolSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaEstudiantePorUnidadRol" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaEstudiantePorUnidadRolSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaEstudiantePorUnidadRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaProfesorPorUnidadRolSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaProfesorPorUnidadRol" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaProfesorPorUnidadRolSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaProfesorPorUnidadRolResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoPersonalEstudianteSoapIn">
+    <wsdl:part name="parameters" element="tns:wsInfoPersonalEstudiante" />
+  </wsdl:message>
+  <wsdl:message name="wsInfoPersonalEstudianteSoapOut">
+    <wsdl:part name="parameters" element="tns:wsInfoPersonalEstudianteResponse" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaPeriodoActualSoapIn">
+    <wsdl:part name="parameters" element="tns:wsConsultaPeriodoActual" />
+  </wsdl:message>
+  <wsdl:message name="wsConsultaPeriodoActualSoapOut">
+    <wsdl:part name="parameters" element="tns:wsConsultaPeriodoActualResponse" />
+  </wsdl:message>
+  <wsdl:portType name="wsandroidSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="autenticacion">
+      <wsdl:input message="tns:autenticacionSoapIn" />
+      <wsdl:output message="tns:autenticacionSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasRegistradas">
+      <wsdl:input message="tns:wsMateriasRegistradasSoapIn" />
+      <wsdl:output message="tns:wsMateriasRegistradasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasDisponibles">
+      <wsdl:input message="tns:wsMateriasDisponiblesSoapIn" />
+      <wsdl:output message="tns:wsMateriasDisponiblesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsBuscarMateria">
+      <wsdl:input message="tns:wsBuscarMateriaSoapIn" />
+      <wsdl:output message="tns:wsBuscarMateriaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsEstudiantesRegistrados">
+      <wsdl:input message="tns:wsEstudiantesRegistradosSoapIn" />
+      <wsdl:output message="tns:wsEstudiantesRegistradosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasADictar">
+      <wsdl:input message="tns:wsMateriasADictarSoapIn" />
+      <wsdl:output message="tns:wsMateriasADictarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoparalelo">
+      <wsdl:input message="tns:wsInfoparaleloSoapIn" />
+      <wsdl:output message="tns:wsInfoparaleloSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioClases">
+      <wsdl:input message="tns:wsHorarioClasesSoapIn" />
+      <wsdl:output message="tns:wsHorarioClasesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioExamenes">
+      <wsdl:input message="tns:wsHorarioExamenesSoapIn" />
+      <wsdl:output message="tns:wsHorarioExamenesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasAulas">
+      <wsdl:input message="tns:wsMateriasAulasSoapIn" />
+      <wsdl:output message="tns:wsMateriasAulasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudiante">
+      <wsdl:input message="tns:wsInfoEstudianteSoapIn" />
+      <wsdl:output message="tns:wsInfoEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteCarrera">
+      <wsdl:input message="tns:wsInfoEstudianteCarreraSoapIn" />
+      <wsdl:output message="tns:wsInfoEstudianteCarreraSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoUsuario">
+      <wsdl:input message="tns:wsInfoUsuarioSoapIn" />
+      <wsdl:output message="tns:wsInfoUsuarioSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteGeneral">
+      <wsdl:input message="tns:wsInfoEstudianteGeneralSoapIn" />
+      <wsdl:output message="tns:wsInfoEstudianteGeneralSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCodigoEstudiante">
+      <wsdl:input message="tns:wsConsultaCodigoEstudianteSoapIn" />
+      <wsdl:output message="tns:wsConsultaCodigoEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsActividadesExtracurriculares">
+      <wsdl:input message="tns:wsActividadesExtracurricularesSoapIn" />
+      <wsdl:output message="tns:wsActividadesExtracurricularesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsFechaRegistros">
+      <wsdl:input message="tns:wsFechaRegistrosSoapIn" />
+      <wsdl:output message="tns:wsFechaRegistrosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasNovalor">
+      <wsdl:input message="tns:wsDeudasNovalorSoapIn" />
+      <wsdl:output message="tns:wsDeudasNovalorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasvalor">
+      <wsdl:input message="tns:wsDeudasvalorSoapIn" />
+      <wsdl:output message="tns:wsDeudasvalorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCalificaciones">
+      <wsdl:input message="tns:wsConsultaCalificacionesSoapIn" />
+      <wsdl:output message="tns:wsConsultaCalificacionesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaAcademicaProfesor">
+      <wsdl:input message="tns:wsCargaAcademicaProfesorSoapIn" />
+      <wsdl:output message="tns:wsCargaAcademicaProfesorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaPolitecnicaProfesor">
+      <wsdl:input message="tns:wsCargaPolitecnicaProfesorSoapIn" />
+      <wsdl:output message="tns:wsCargaPolitecnicaProfesorSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsHistorialCreditos">
+      <wsdl:input message="tns:wsHistorialCreditosSoapIn" />
+      <wsdl:output message="tns:wsHistorialCreditosSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteMalla">
+      <wsdl:input message="tns:wsInfoEstudianteMallaSoapIn" />
+      <wsdl:output message="tns:wsInfoEstudianteMallaSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaUnidadesAcademicas">
+      <wsdl:input message="tns:wsConsultaUnidadesAcademicasSoapIn" />
+      <wsdl:output message="tns:wsConsultaUnidadesAcademicasSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaRoles">
+      <wsdl:input message="tns:wsConsultaRolesSoapIn" />
+      <wsdl:output message="tns:wsConsultaRolesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultarPersonaPorNombres">
+      <wsdl:input message="tns:wsConsultarPersonaPorNombresSoapIn" />
+      <wsdl:output message="tns:wsConsultarPersonaPorNombresSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaEstudiantePorUnidadRol">
+      <wsdl:input message="tns:wsConsultaEstudiantePorUnidadRolSoapIn" />
+      <wsdl:output message="tns:wsConsultaEstudiantePorUnidadRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaProfesorPorUnidadRol">
+      <wsdl:input message="tns:wsConsultaProfesorPorUnidadRolSoapIn" />
+      <wsdl:output message="tns:wsConsultaProfesorPorUnidadRolSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoPersonalEstudiante">
+      <wsdl:input message="tns:wsInfoPersonalEstudianteSoapIn" />
+      <wsdl:output message="tns:wsInfoPersonalEstudianteSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaPeriodoActual">
+      <wsdl:input message="tns:wsConsultaPeriodoActualSoapIn" />
+      <wsdl:output message="tns:wsConsultaPeriodoActualSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="wsandroidSoap" type="tns:wsandroidSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="autenticacion">
+      <soap:operation soapAction="http://tempuri.org/autenticacion" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasRegistradas">
+      <soap:operation soapAction="http://tempuri.org/wsMateriasRegistradas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasDisponibles">
+      <soap:operation soapAction="http://tempuri.org/wsMateriasDisponibles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBuscarMateria">
+      <soap:operation soapAction="http://tempuri.org/wsBuscarMateria" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsEstudiantesRegistrados">
+      <soap:operation soapAction="http://tempuri.org/wsEstudiantesRegistrados" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasADictar">
+      <soap:operation soapAction="http://tempuri.org/wsMateriasADictar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoparalelo">
+      <soap:operation soapAction="http://tempuri.org/wsInfoparalelo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioClases">
+      <soap:operation soapAction="http://tempuri.org/wsHorarioClases" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioExamenes">
+      <soap:operation soapAction="http://tempuri.org/wsHorarioExamenes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasAulas">
+      <soap:operation soapAction="http://tempuri.org/wsMateriasAulas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudiante">
+      <soap:operation soapAction="http://tempuri.org/wsInfoEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteCarrera">
+      <soap:operation soapAction="http://tempuri.org/wsInfoEstudianteCarrera" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoUsuario">
+      <soap:operation soapAction="http://tempuri.org/wsInfoUsuario" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteGeneral">
+      <soap:operation soapAction="http://tempuri.org/wsInfoEstudianteGeneral" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCodigoEstudiante">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaCodigoEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsActividadesExtracurriculares">
+      <soap:operation soapAction="http://tempuri.org/wsActividadesExtracurriculares" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsFechaRegistros">
+      <soap:operation soapAction="http://tempuri.org/wsFechaRegistros" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasNovalor">
+      <soap:operation soapAction="http://tempuri.org/wsDeudasNovalor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasvalor">
+      <soap:operation soapAction="http://tempuri.org/wsDeudasvalor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCalificaciones">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaCalificaciones" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaAcademicaProfesor">
+      <soap:operation soapAction="http://tempuri.org/wsCargaAcademicaProfesor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaPolitecnicaProfesor">
+      <soap:operation soapAction="http://tempuri.org/wsCargaPolitecnicaProfesor" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHistorialCreditos">
+      <soap:operation soapAction="http://tempuri.org/wsHistorialCreditos" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteMalla">
+      <soap:operation soapAction="http://tempuri.org/wsInfoEstudianteMalla" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaUnidadesAcademicas">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaUnidadesAcademicas" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaRoles">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaRoles" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultarPersonaPorNombres">
+      <soap:operation soapAction="http://tempuri.org/wsConsultarPersonaPorNombres" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaEstudiantePorUnidadRol">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaEstudiantePorUnidadRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaProfesorPorUnidadRol">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaProfesorPorUnidadRol" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoPersonalEstudiante">
+      <soap:operation soapAction="http://tempuri.org/wsInfoPersonalEstudiante" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaPeriodoActual">
+      <soap:operation soapAction="http://tempuri.org/wsConsultaPeriodoActual" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="wsandroidSoap12" type="tns:wsandroidSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="autenticacion">
+      <soap12:operation soapAction="http://tempuri.org/autenticacion" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasRegistradas">
+      <soap12:operation soapAction="http://tempuri.org/wsMateriasRegistradas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasDisponibles">
+      <soap12:operation soapAction="http://tempuri.org/wsMateriasDisponibles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsBuscarMateria">
+      <soap12:operation soapAction="http://tempuri.org/wsBuscarMateria" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsEstudiantesRegistrados">
+      <soap12:operation soapAction="http://tempuri.org/wsEstudiantesRegistrados" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasADictar">
+      <soap12:operation soapAction="http://tempuri.org/wsMateriasADictar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoparalelo">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoparalelo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioClases">
+      <soap12:operation soapAction="http://tempuri.org/wsHorarioClases" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHorarioExamenes">
+      <soap12:operation soapAction="http://tempuri.org/wsHorarioExamenes" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsMateriasAulas">
+      <soap12:operation soapAction="http://tempuri.org/wsMateriasAulas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteCarrera">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoEstudianteCarrera" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoUsuario">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoUsuario" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteGeneral">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoEstudianteGeneral" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCodigoEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaCodigoEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsActividadesExtracurriculares">
+      <soap12:operation soapAction="http://tempuri.org/wsActividadesExtracurriculares" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsFechaRegistros">
+      <soap12:operation soapAction="http://tempuri.org/wsFechaRegistros" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasNovalor">
+      <soap12:operation soapAction="http://tempuri.org/wsDeudasNovalor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsDeudasvalor">
+      <soap12:operation soapAction="http://tempuri.org/wsDeudasvalor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaCalificaciones">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaCalificaciones" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaAcademicaProfesor">
+      <soap12:operation soapAction="http://tempuri.org/wsCargaAcademicaProfesor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsCargaPolitecnicaProfesor">
+      <soap12:operation soapAction="http://tempuri.org/wsCargaPolitecnicaProfesor" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsHistorialCreditos">
+      <soap12:operation soapAction="http://tempuri.org/wsHistorialCreditos" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoEstudianteMalla">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoEstudianteMalla" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaUnidadesAcademicas">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaUnidadesAcademicas" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaRoles">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaRoles" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultarPersonaPorNombres">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultarPersonaPorNombres" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaEstudiantePorUnidadRol">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaEstudiantePorUnidadRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaProfesorPorUnidadRol">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaProfesorPorUnidadRol" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsInfoPersonalEstudiante">
+      <soap12:operation soapAction="http://tempuri.org/wsInfoPersonalEstudiante" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="wsConsultaPeriodoActual">
+      <soap12:operation soapAction="http://tempuri.org/wsConsultaPeriodoActual" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="wsandroid">
+    <wsdl:port name="wsandroidSoap" binding="tns:wsandroidSoap">
+      <soap:address location="https://ws.espol.edu.ec/saac/wsandroid.asmx" />
+    </wsdl:port>
+    <wsdl:port name="wsandroidSoap12" binding="tns:wsandroidSoap12">
+      <soap12:address location="https://ws.espol.edu.ec/saac/wsandroid.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

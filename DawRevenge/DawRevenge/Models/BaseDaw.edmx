@@ -1,0 +1,512 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DawModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="carro">
+          <Key>
+            <PropertyRef Name="placa" />
+          </Key>
+          <Property Name="placa" Type="varchar" MaxLength="7" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="marca" Type="varchar" MaxLength="20" />
+          <Property Name="modelo" Type="varchar" MaxLength="20" />
+          <Property Name="color" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="contenidoText" Type="varchar" MaxLength="300" />
+          <Property Name="fecha" Type="datetime" Precision="0" />
+        </EntityType>
+        <EntityType Name="peticion">
+          <Key>
+            <PropertyRef Name="id_peticion" />
+          </Key>
+          <Property Name="id_peticion" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="id_ruta" Type="int" />
+          <Property Name="posicionLatLon" Type="varchar" MaxLength="150" />
+          <Property Name="valor" Type="decimal" Precision="3" Scale="2" />
+          <Property Name="estado" Type="enum" />
+          <Property Name="fecha" Type="date" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_usuario" Type="int" />
+          <Property Name="inicioLatLon" Type="varchar" MaxLength="150" />
+          <Property Name="finLatLon" Type="varchar" MaxLength="150" />
+          <Property Name="fecha" Type="datetime" Precision="0" />
+          <Property Name="estado" Type="enum" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="seguidorusuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="seguido" Type="int" />
+          <Property Name="sigue" Type="int" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cedula" Type="varchar" MaxLength="10" />
+          <Property Name="nombres" Type="varchar" MaxLength="100" />
+          <Property Name="apellidos" Type="varchar" MaxLength="100" />
+          <Property Name="nombUsuario" Type="varchar" MaxLength="30" />
+          <Property Name="contrasenia" Type="varchar" MaxLength="30" />
+          <Property Name="matricula" Type="varchar" MaxLength="9" />
+          <Property Name="userFB" Type="varchar" MaxLength="25" />
+          <Property Name="userTW" Type="varchar" MaxLength="25" />
+          <Property Name="rutaImagen" Type="varchar" MaxLength="25" />
+          <Property Name="tieneCarro" Type="int" />
+          <Property Name="nMultas" Type="int" />
+          <Property Name="nSeguidores" Type="int" />
+          <Property Name="nSiguiendo" Type="int" />
+        </EntityType>
+        <Association Name="carro_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="carro" Type="Self.carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="carro">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comentario_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peticion_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peticion_ibfk_2">
+          <End Role="ruta" Type="Self.ruta" Multiplicity="0..1" />
+          <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ruta_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="ruta" Type="Self.ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ruta">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seguidorusuario_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="seguidorusuario">
+              <PropertyRef Name="sigue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seguidorusuario_ibfk_2">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="seguidorusuario">
+              <PropertyRef Name="seguido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DawModelStoreContainer">
+          <EntitySet Name="carro" EntityType="Self.carro" Schema="proyectodaw" store:Type="Tables" />
+          <EntitySet Name="comentario" EntityType="Self.comentario" Schema="proyectodaw" store:Type="Tables" />
+          <EntitySet Name="peticion" EntityType="Self.peticion" Schema="proyectodaw" store:Type="Tables" />
+          <EntitySet Name="ruta" EntityType="Self.ruta" Schema="proyectodaw" store:Type="Tables" />
+          <EntitySet Name="seguidorusuario" EntityType="Self.seguidorusuario" Schema="proyectodaw" store:Type="Tables" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" Schema="proyectodaw" store:Type="Tables" />
+          <AssociationSet Name="carro_ibfk_1" Association="Self.carro_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="carro" EntitySet="carro" />
+          </AssociationSet>
+          <AssociationSet Name="comentario_ibfk_1" Association="Self.comentario_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="peticion_ibfk_1" Association="Self.peticion_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <AssociationSet Name="peticion_ibfk_2" Association="Self.peticion_ibfk_2">
+            <End Role="ruta" EntitySet="ruta" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <AssociationSet Name="ruta_ibfk_1" Association="Self.ruta_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ruta" EntitySet="ruta" />
+          </AssociationSet>
+          <AssociationSet Name="seguidorusuario_ibfk_1" Association="Self.seguidorusuario_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+          </AssociationSet>
+          <AssociationSet Name="seguidorusuario_ibfk_2" Association="Self.seguidorusuario_ibfk_2">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DawModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="carro">
+          <Key>
+            <PropertyRef Name="placa" />
+          </Key>
+          <Property Name="placa" Type="String" MaxLength="7" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="marca" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="modelo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="usuario" Relationship="Self.carro_ibfk_1" FromRole="carro" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="comentario">
+          <Key>
+            <PropertyRef Name="id_comentario" />
+          </Key>
+          <Property Name="id_comentario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="contenidoText" Type="String" MaxLength="300" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" />
+          <NavigationProperty Name="usuario" Relationship="Self.comentario_ibfk_1" FromRole="comentario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="peticion">
+          <Key>
+            <PropertyRef Name="id_peticion" />
+          </Key>
+          <Property Name="id_peticion" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="id_ruta" Type="Int32" />
+          <Property Name="posicionLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="valor" Type="Decimal" />
+          <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" />
+          <NavigationProperty Name="usuario" Relationship="Self.peticion_ibfk_1" FromRole="peticion" ToRole="usuario" />
+          <NavigationProperty Name="ruta" Relationship="Self.peticion_ibfk_2" FromRole="peticion" ToRole="ruta" />
+        </EntityType>
+        <EntityType Name="ruta">
+          <Key>
+            <PropertyRef Name="id_ruta" />
+          </Key>
+          <Property Name="id_ruta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_usuario" Type="Int32" />
+          <Property Name="inicioLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="finLatLon" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="fecha" Type="DateTime" />
+          <Property Name="estado" Type="String" MaxLength="65532" FixedLength="false" Unicode="false" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="peticion" Relationship="Self.peticion_ibfk_2" FromRole="ruta" ToRole="peticion" />
+          <NavigationProperty Name="usuario" Relationship="Self.ruta_ibfk_1" FromRole="ruta" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="seguidorusuario">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="seguido" Type="Int32" />
+          <Property Name="sigue" Type="Int32" />
+          <NavigationProperty Name="usuario" Relationship="Self.seguidorusuario_ibfk_1" FromRole="seguidorusuario" ToRole="usuario" />
+          <NavigationProperty Name="usuario1" Relationship="Self.seguidorusuario_ibfk_2" FromRole="seguidorusuario" ToRole="usuario" />
+        </EntityType>
+        <EntityType Name="usuario">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cedula" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="nombres" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="apellidos" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nombUsuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="contrasenia" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="matricula" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="userFB" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="userTW" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="rutaImagen" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="tieneCarro" Type="Int32" />
+          <Property Name="nMultas" Type="Int32" />
+          <Property Name="nSeguidores" Type="Int32" />
+          <Property Name="nSiguiendo" Type="Int32" />
+          <NavigationProperty Name="carro" Relationship="Self.carro_ibfk_1" FromRole="usuario" ToRole="carro" />
+          <NavigationProperty Name="comentario" Relationship="Self.comentario_ibfk_1" FromRole="usuario" ToRole="comentario" />
+          <NavigationProperty Name="peticion" Relationship="Self.peticion_ibfk_1" FromRole="usuario" ToRole="peticion" />
+          <NavigationProperty Name="ruta" Relationship="Self.ruta_ibfk_1" FromRole="usuario" ToRole="ruta" />
+          <NavigationProperty Name="seguidorusuario" Relationship="Self.seguidorusuario_ibfk_1" FromRole="usuario" ToRole="seguidorusuario" />
+          <NavigationProperty Name="seguidorusuario1" Relationship="Self.seguidorusuario_ibfk_2" FromRole="usuario" ToRole="seguidorusuario" />
+        </EntityType>
+        <Association Name="carro_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="carro" Type="Self.carro" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="carro">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="comentario_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="comentario" Type="Self.comentario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="comentario">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peticion_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="peticion_ibfk_2">
+          <End Role="ruta" Type="Self.ruta" Multiplicity="0..1" />
+          <End Role="peticion" Type="Self.peticion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ruta">
+              <PropertyRef Name="id_ruta" />
+            </Principal>
+            <Dependent Role="peticion">
+              <PropertyRef Name="id_ruta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ruta_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="ruta" Type="Self.ruta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="ruta">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seguidorusuario_ibfk_1">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="seguidorusuario">
+              <PropertyRef Name="sigue" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="seguidorusuario_ibfk_2">
+          <End Role="usuario" Type="Self.usuario" Multiplicity="0..1" />
+          <End Role="seguidorusuario" Type="Self.seguidorusuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="usuario">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="seguidorusuario">
+              <PropertyRef Name="seguido" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DawEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carro" EntityType="Self.carro" />
+          <EntitySet Name="comentario" EntityType="Self.comentario" />
+          <EntitySet Name="peticion" EntityType="Self.peticion" />
+          <EntitySet Name="ruta" EntityType="Self.ruta" />
+          <EntitySet Name="seguidorusuario" EntityType="Self.seguidorusuario" />
+          <EntitySet Name="usuario" EntityType="Self.usuario" />
+          <AssociationSet Name="carro_ibfk_1" Association="Self.carro_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="carro" EntitySet="carro" />
+          </AssociationSet>
+          <AssociationSet Name="comentario_ibfk_1" Association="Self.comentario_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="comentario" EntitySet="comentario" />
+          </AssociationSet>
+          <AssociationSet Name="peticion_ibfk_1" Association="Self.peticion_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <AssociationSet Name="peticion_ibfk_2" Association="Self.peticion_ibfk_2">
+            <End Role="ruta" EntitySet="ruta" />
+            <End Role="peticion" EntitySet="peticion" />
+          </AssociationSet>
+          <AssociationSet Name="ruta_ibfk_1" Association="Self.ruta_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="ruta" EntitySet="ruta" />
+          </AssociationSet>
+          <AssociationSet Name="seguidorusuario_ibfk_1" Association="Self.seguidorusuario_ibfk_1">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+          </AssociationSet>
+          <AssociationSet Name="seguidorusuario_ibfk_2" Association="Self.seguidorusuario_ibfk_2">
+            <End Role="usuario" EntitySet="usuario" />
+            <End Role="seguidorusuario" EntitySet="seguidorusuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DawModelStoreContainer" CdmEntityContainer="DawEntities">
+          <EntitySetMapping Name="carro">
+            <EntityTypeMapping TypeName="DawModel.carro">
+              <MappingFragment StoreEntitySet="carro">
+                <ScalarProperty Name="placa" ColumnName="placa" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="marca" ColumnName="marca" />
+                <ScalarProperty Name="modelo" ColumnName="modelo" />
+                <ScalarProperty Name="color" ColumnName="color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="comentario">
+            <EntityTypeMapping TypeName="DawModel.comentario">
+              <MappingFragment StoreEntitySet="comentario">
+                <ScalarProperty Name="id_comentario" ColumnName="id_comentario" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="contenidoText" ColumnName="contenidoText" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="peticion">
+            <EntityTypeMapping TypeName="DawModel.peticion">
+              <MappingFragment StoreEntitySet="peticion">
+                <ScalarProperty Name="id_peticion" ColumnName="id_peticion" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+                <ScalarProperty Name="posicionLatLon" ColumnName="posicionLatLon" />
+                <ScalarProperty Name="valor" ColumnName="valor" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ruta">
+            <EntityTypeMapping TypeName="DawModel.ruta">
+              <MappingFragment StoreEntitySet="ruta">
+                <ScalarProperty Name="id_ruta" ColumnName="id_ruta" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="inicioLatLon" ColumnName="inicioLatLon" />
+                <ScalarProperty Name="finLatLon" ColumnName="finLatLon" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="seguidorusuario">
+            <EntityTypeMapping TypeName="DawModel.seguidorusuario">
+              <MappingFragment StoreEntitySet="seguidorusuario">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="seguido" ColumnName="seguido" />
+                <ScalarProperty Name="sigue" ColumnName="sigue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="usuario">
+            <EntityTypeMapping TypeName="DawModel.usuario">
+              <MappingFragment StoreEntitySet="usuario">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="cedula" ColumnName="cedula" />
+                <ScalarProperty Name="nombres" ColumnName="nombres" />
+                <ScalarProperty Name="apellidos" ColumnName="apellidos" />
+                <ScalarProperty Name="nombUsuario" ColumnName="nombUsuario" />
+                <ScalarProperty Name="contrasenia" ColumnName="contrasenia" />
+                <ScalarProperty Name="matricula" ColumnName="matricula" />
+                <ScalarProperty Name="userFB" ColumnName="userFB" />
+                <ScalarProperty Name="userTW" ColumnName="userTW" />
+                <ScalarProperty Name="rutaImagen" ColumnName="rutaImagen" />
+                <ScalarProperty Name="tieneCarro" ColumnName="tieneCarro" />
+                <ScalarProperty Name="nMultas" ColumnName="nMultas" />
+                <ScalarProperty Name="nSeguidores" ColumnName="nSeguidores" />
+                <ScalarProperty Name="nSiguiendo" ColumnName="nSiguiendo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
